@@ -5,3 +5,4 @@ build/
 *.joos
 .idea/
 rafael-lenguajes.iml
+/dist/
