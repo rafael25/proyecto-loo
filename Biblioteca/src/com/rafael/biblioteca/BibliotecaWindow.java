@@ -31,13 +31,13 @@ import org.openide.util.NbBundle.Messages;
 		preferredID = "MainWindowTopComponent"
 )
 @Messages({
-	"CTL_MainWindowAction=MainWindow",
-	"CTL_MainWindowTopComponent=MainWindow Window",
-	"HINT_MainWindowTopComponent=This is a MainWindow window"
+	"CTL_MainWindowAction=Biblioteca",
+	"CTL_MainWindowTopComponent=Biblioteca",
+	"HINT_MainWindowTopComponent=Esta es la biblioteca"
 })
-public final class MainWindowTopComponent extends TopComponent {
+public final class BibliotecaWindow extends TopComponent {
 
-	public MainWindowTopComponent() {
+	public BibliotecaWindow() {
 		initComponents();
 		setName(Bundle.CTL_MainWindowTopComponent());
 		setToolTipText(Bundle.HINT_MainWindowTopComponent());
@@ -79,15 +79,20 @@ public final class MainWindowTopComponent extends TopComponent {
 
         librosTitle.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         librosTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(librosTitle, org.openide.util.NbBundle.getMessage(MainWindowTopComponent.class, "MainWindowTopComponent.librosTitle.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(librosTitle, org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosTitle.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(librosAgragarButton, org.openide.util.NbBundle.getMessage(MainWindowTopComponent.class, "MainWindowTopComponent.librosAgragarButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(librosAgragarButton, org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosAgragarButton.text")); // NOI18N
+        librosAgragarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                librosAgragarButtonActionPerformed(evt);
+            }
+        });
 
-        org.openide.awt.Mnemonics.setLocalizedText(librosEditarButton, org.openide.util.NbBundle.getMessage(MainWindowTopComponent.class, "MainWindowTopComponent.librosEditarButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(librosEditarButton, org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosEditarButton.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(librosExtraerButton, org.openide.util.NbBundle.getMessage(MainWindowTopComponent.class, "MainWindowTopComponent.librosExtraerButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(librosExtraerButton, org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosExtraerButton.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(librosEliminarButton, org.openide.util.NbBundle.getMessage(MainWindowTopComponent.class, "MainWindowTopComponent.librosEliminarButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(librosEliminarButton, org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosEliminarButton.text")); // NOI18N
 
         javax.swing.GroupLayout librosTabLayout = new javax.swing.GroupLayout(librosTab);
         librosTab.setLayout(librosTabLayout);
@@ -124,7 +129,7 @@ public final class MainWindowTopComponent extends TopComponent {
                 .addContainerGap())
         );
 
-        mainTabs.addTab(org.openide.util.NbBundle.getMessage(MainWindowTopComponent.class, "MainWindowTopComponent.librosTab.TabConstraints.tabTitle"), librosTab); // NOI18N
+        mainTabs.addTab(org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosTab.TabConstraints.tabTitle"), librosTab); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -138,6 +143,19 @@ public final class MainWindowTopComponent extends TopComponent {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void librosAgragarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_librosAgragarButtonActionPerformed
+		mainTabs.add(new AgregarTab(), "Agregar", 1);
+		mainTabs.setSelectedIndex(1);
+		mainTabs.setEnabledAt(0, false);
+    }//GEN-LAST:event_librosAgragarButtonActionPerformed
+
+	public static void removTab(int index) {
+		mainTabs.remove(index);
+	}
+	
+	public static void setTabEnabled(int index, boolean enabled) {
+		mainTabs.setEnabledAt(index, enabled);
+	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton librosAgragarButton;
     private javax.swing.JButton librosEditarButton;
@@ -147,7 +165,7 @@ public final class MainWindowTopComponent extends TopComponent {
     private javax.swing.JTable librosTable;
     private javax.swing.JScrollPane librosTableScroll;
     private javax.swing.JLabel librosTitle;
-    private javax.swing.JTabbedPane mainTabs;
+    private static javax.swing.JTabbedPane mainTabs;
     // End of variables declaration//GEN-END:variables
 	@Override
 	public void componentOpened() {
