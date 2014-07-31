@@ -5,6 +5,7 @@
  */
 package com.rafael.biblioteca;
 
+import java.io.IOException;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -41,7 +42,7 @@ public final class BibliotecaWindow extends TopComponent {
 		initComponents();
 		setName(Bundle.CTL_MainWindowTopComponent());
 		setToolTipText(Bundle.HINT_MainWindowTopComponent());
-		putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
+		putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.FALSE);
 		putClientProperty(TopComponent.PROP_DRAGGING_DISABLED, Boolean.TRUE);
 		putClientProperty(TopComponent.PROP_UNDOCKING_DISABLED, Boolean.TRUE);
 
@@ -67,14 +68,7 @@ public final class BibliotecaWindow extends TopComponent {
 
         mainTabs.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        librosTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
+        librosTable.setModel(new TablaLibrosModel());
         librosTableScroll.setViewportView(librosTable);
 
         librosTitle.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -175,6 +169,13 @@ public final class BibliotecaWindow extends TopComponent {
 	@Override
 	public void componentClosed() {
 		// TODO add custom code on component closing
+		try {
+			BibliotecaDB.getInstance().commit();
+		} catch (IOException e) {
+			System.out.println("IOException: " + e.getMessage());
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException: " + e.getMessage());
+		}
 	}
 
 	void writeProperties(java.util.Properties p) {

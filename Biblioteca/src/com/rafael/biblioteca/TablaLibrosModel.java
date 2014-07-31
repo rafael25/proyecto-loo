@@ -6,28 +6,65 @@
 
 package com.rafael.biblioteca;
 
+import java.io.IOException;
 import javax.swing.table.AbstractTableModel;
+import java.util.List;
 
 /**
  *
  * @author rafael
  */
 public class TablaLibrosModel extends AbstractTableModel {
+	private String[] columnNames = {
+		"ID", "Titulo", "Autor"
+	};
 	
+	private List<Libro> tableData;
+	
+	public TablaLibrosModel() {
+		super();
+		try {
+			this.tableData = BibliotecaDB.getInstance().selectAll();
+		} catch (IOException e) {
+			System.out.println("IOException: " + e.getMessage());
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException: " + e.getMessage());
+		}
+	}
 
 	@Override
 	public int getRowCount() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return tableData.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return columnNames.length;
+	}
+	
+	@Override
+	public String getColumnName(int column) {
+		return columnNames[column];
+	}
+	
+	@Override
+	public Class getColumnClass(int column) {
+		return getValueAt(0, column).getClass();
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Libro row = tableData.get(rowIndex);
+		
+		switch(columnIndex) {
+			case 0:
+				return row.getId();
+			case 1:
+				return row.getTitulo();
+			case 2:
+				return row.getAutor();
+			default:
+				return "";
+		}
 	}
-	
 }
