@@ -6,6 +6,8 @@
 
 package com.rafael.biblioteca;
 
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author rafael
@@ -17,6 +19,11 @@ public class AgregarTab extends javax.swing.JPanel {
 	 */
 	public AgregarTab() {
 		initComponents();
+	}
+	
+	public AgregarTab(Libro libro) {
+		initComponents();
+		// Leer los datos del libro y asignarlos a la interfaz
 	}
 
 	/**
@@ -61,6 +68,11 @@ public class AgregarTab extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(archivoLabel, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.archivoLabel.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(archivoButton, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.archivoButton.text")); // NOI18N
+        archivoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                archivoButtonActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(guardarButton, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.guardarButton.text")); // NOI18N
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +137,13 @@ public class AgregarTab extends javax.swing.JPanel {
         BibliotecaWindow.removTab(1);
 		BibliotecaWindow.setTabEnabled(0, true);
     }//GEN-LAST:event_guardarButtonActionPerformed
+
+    private void archivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivoButtonActionPerformed
+        JFileChooser fc = new JFileChooser();
+		if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			// Asignar la ruta del archivo
+		}
+    }//GEN-LAST:event_archivoButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
