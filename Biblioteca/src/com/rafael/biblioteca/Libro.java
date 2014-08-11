@@ -21,14 +21,14 @@ import java.nio.file.Files;
 public class Libro implements Serializable {
 	private int id;
 	private String titulo;
-	private String autor;
+	private Autor autor;
 	private String resumen;
 	private File archivo;
 	private byte[] contenido;
 	
 	public Libro() {}
 
-	public Libro(String titulo, String autor, String resumen, File archivo) throws IOException {
+	public Libro(String titulo, Autor autor, String resumen, File archivo) throws IOException {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.resumen = resumen;
@@ -53,11 +53,11 @@ public class Libro implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public String getAutor() {
+	public Autor getAutor() {
 		return autor;
 	}
 
-	public void setAutor(String autor) {
+	public void setAutor(Autor autor) {
 		this.autor = autor;
 	}
 
@@ -87,5 +87,10 @@ public class Libro implements Serializable {
 		fos.write(contenido);
 		fos.flush();
 		fos.close();
+	}
+
+	@Override
+	public String toString() {
+		return "Libro{" + "id=" + id + ", titulo=" + titulo + ", resumen=" + resumen + '}';
 	}
 }

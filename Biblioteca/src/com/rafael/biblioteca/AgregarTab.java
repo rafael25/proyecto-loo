@@ -6,19 +6,24 @@
 
 package com.rafael.biblioteca;
 
+import java.io.IOException;
 import javax.swing.JFileChooser;
+import org.openide.util.Exceptions;
 
 /**
  *
  * @author rafael
  */
 public class AgregarTab extends javax.swing.JPanel {
+	
+	private Libro libro;
 
 	/**
 	 * Creates new form agregarTab
 	 */
 	public AgregarTab() {
 		initComponents();
+		libro = new Libro();
 	}
 	
 	public AgregarTab(Libro libro) {
@@ -40,12 +45,19 @@ public class AgregarTab extends javax.swing.JPanel {
         tituloText = new javax.swing.JTextField();
         autorLabel = new javax.swing.JLabel();
         resumenLabel = new javax.swing.JLabel();
-        autorText = new javax.swing.JTextField();
+        nombreText = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         resumenText = new javax.swing.JTextArea();
         archivoLabel = new javax.swing.JLabel();
         archivoButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
+        nombreLabel = new javax.swing.JLabel();
+        nacionalidadText = new javax.swing.JTextField();
+        nacionalidadLabel = new javax.swing.JLabel();
+        nacimientoText = new javax.swing.JTextField();
+        nacimientoLabel = new javax.swing.JLabel();
+        muerteText = new javax.swing.JTextField();
+        muerteLabel = new javax.swing.JLabel();
 
         panelTitle.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         panelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -55,11 +67,12 @@ public class AgregarTab extends javax.swing.JPanel {
 
         tituloText.setText(org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.tituloText.text")); // NOI18N
 
+        autorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(autorLabel, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.autorLabel.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(resumenLabel, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.resumenLabel.text")); // NOI18N
 
-        autorText.setText(org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.autorText.text")); // NOI18N
+        nombreText.setText(org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.nombreText.text")); // NOI18N
 
         resumenText.setColumns(20);
         resumenText.setRows(5);
@@ -81,6 +94,20 @@ public class AgregarTab extends javax.swing.JPanel {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(nombreLabel, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.nombreLabel.text")); // NOI18N
+
+        nacionalidadText.setText(org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.nacionalidadText.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(nacionalidadLabel, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.nacionalidadLabel.text")); // NOI18N
+
+        nacimientoText.setText(org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.nacimientoText.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(nacimientoLabel, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.nacimientoLabel.text")); // NOI18N
+
+        muerteText.setText(org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.muerteText.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(muerteLabel, org.openide.util.NbBundle.getMessage(AgregarTab.class, "AgregarTab.muerteLabel.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,21 +116,32 @@ public class AgregarTab extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(guardarButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tituloLabel)
-                            .addComponent(resumenLabel)
-                            .addComponent(autorLabel)
-                            .addComponent(archivoLabel))
+                            .addComponent(resumenLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(archivoLabel)
+                            .addComponent(tituloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(archivoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tituloText)
-                            .addComponent(autorText)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nacionalidadLabel)
+                                    .addComponent(nombreLabel)
+                                    .addComponent(nacimientoLabel)
+                                    .addComponent(muerteLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nombreText)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(guardarButton))
+                                    .addComponent(nacionalidadText)
+                                    .addComponent(nacimientoText)
+                                    .addComponent(muerteText)))))
+                    .addComponent(autorLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -115,33 +153,65 @@ public class AgregarTab extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tituloLabel)
                     .addComponent(tituloText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(autorLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(autorLabel)
-                    .addComponent(autorText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombreLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nacionalidadText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nacionalidadLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nacimientoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nacimientoLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(muerteText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(muerteLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resumenLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(archivoButton)
-                    .addComponent(archivoLabel))
-                .addGap(18, 18, 18)
-                .addComponent(guardarButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(archivoButton)
+                            .addComponent(archivoLabel))
+                        .addGap(18, 18, 18)
+                        .addComponent(guardarButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(resumenLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
-        BibliotecaWindow.removTab(1);
+		BibliotecaWindow.removTab(1);
 		BibliotecaWindow.setTabEnabled(0, true);
+		
+		Autor autor = new Autor(nombreText.getText(), nacionalidadText.getText(), null, null);
+		libro.setTitulo(tituloText.getText());
+		libro.setAutor(autor);
+		libro.setResumen(resumenText.getText());
+		
+		try {
+			BibliotecaDB db = BibliotecaDB.getInstance();
+			db.insert(libro);
+		} catch (IOException ex) {
+			Exceptions.printStackTrace(ex);
+		} catch (ClassNotFoundException ex) {
+			Exceptions.printStackTrace(ex);
+		}
     }//GEN-LAST:event_guardarButtonActionPerformed
 
     private void archivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archivoButtonActionPerformed
         JFileChooser fc = new JFileChooser();
 		if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			// Asignar la ruta del archivo
+			libro.setArchivo(fc.getSelectedFile());
+			archivoButton.setText(fc.getSelectedFile().getName());
 		}
     }//GEN-LAST:event_archivoButtonActionPerformed
 
@@ -150,9 +220,16 @@ public class AgregarTab extends javax.swing.JPanel {
     private javax.swing.JButton archivoButton;
     private javax.swing.JLabel archivoLabel;
     private javax.swing.JLabel autorLabel;
-    private javax.swing.JTextField autorText;
     private javax.swing.JButton guardarButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel muerteLabel;
+    private javax.swing.JTextField muerteText;
+    private javax.swing.JLabel nacimientoLabel;
+    private javax.swing.JTextField nacimientoText;
+    private javax.swing.JLabel nacionalidadLabel;
+    private javax.swing.JTextField nacionalidadText;
+    private javax.swing.JLabel nombreLabel;
+    private javax.swing.JTextField nombreText;
     private javax.swing.JLabel panelTitle;
     private javax.swing.JLabel resumenLabel;
     private javax.swing.JTextArea resumenText;
