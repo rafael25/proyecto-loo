@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.util.Exceptions;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 
@@ -83,10 +84,20 @@ public final class BibliotecaWindow extends TopComponent {
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(librosEditarButton, org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosEditarButton.text")); // NOI18N
+        librosEditarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                librosEditarButtonActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(librosExtraerButton, org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosExtraerButton.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(librosEliminarButton, org.openide.util.NbBundle.getMessage(BibliotecaWindow.class, "BibliotecaWindow.librosEliminarButton.text")); // NOI18N
+        librosEliminarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                librosEliminarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout librosTabLayout = new javax.swing.GroupLayout(librosTab);
         librosTab.setLayout(librosTabLayout);
@@ -142,6 +153,23 @@ public final class BibliotecaWindow extends TopComponent {
 		mainTabs.setSelectedIndex(1);
 		mainTabs.setEnabledAt(0, false);
     }//GEN-LAST:event_librosAgragarButtonActionPerformed
+
+    private void librosEliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_librosEliminarButtonActionPerformed
+		int id = Integer.parseInt(librosTable.getValueAt(librosTable.getSelectedRow(), 0).toString());
+		try {
+			BibliotecaDB db = BibliotecaDB.getInstance();
+			db.delete(id);
+		} catch (IOException ex) {
+			Exceptions.printStackTrace(ex);
+		} catch (ClassNotFoundException ex) {
+			Exceptions.printStackTrace(ex);
+		}
+		
+    }//GEN-LAST:event_librosEliminarButtonActionPerformed
+
+    private void librosEditarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_librosEditarButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_librosEditarButtonActionPerformed
 
 	public static void removTab(int index) {
 		mainTabs.remove(index);

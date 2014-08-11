@@ -138,6 +138,9 @@
                   <ResourceString bundle="com/rafael/biblioteca/Bundle.properties" key="BibliotecaWindow.librosEditarButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="librosEditarButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="librosExtraerButton">
               <Properties>
@@ -152,6 +155,9 @@
                   <ResourceString bundle="com/rafael/biblioteca/Bundle.properties" key="BibliotecaWindow.librosEliminarButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="librosEliminarButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
