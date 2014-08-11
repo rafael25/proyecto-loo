@@ -42,7 +42,7 @@ public final class BibliotecaWindow extends TopComponent {
 		initComponents();
 		setName(Bundle.CTL_MainWindowTopComponent());
 		setToolTipText(Bundle.HINT_MainWindowTopComponent());
-		putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.FALSE);
+		putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
 		putClientProperty(TopComponent.PROP_DRAGGING_DISABLED, Boolean.TRUE);
 		putClientProperty(TopComponent.PROP_UNDOCKING_DISABLED, Boolean.TRUE);
 
